@@ -1,0 +1,33 @@
+[PROCESS_DETAILS]
+# time in milisecs
+NUMBER_OF_SIMS = 500
+CPU_COUNT = 1
+ALLOCATION_POLICY = DEADLINE
+IMAGE_NAME = *.*.*.*:5000/ubuntu-matlab
+WORKING_DIR = /opt/dddassimulation/
+# Currently using zeromq, will change for dynamic type later
+AGGREGATOR_IP = *.*.*.*
+AGGREGATOR_PORT = 5556
+# 10 percent margin
+MARGIN = 0.0
+
+# These details have to be figured out for different hosts
+AVG_CPU = 5
+
+[SIM_INPUT]
+# deadline in seconds
+DEADLINE = 240
+
+#In ms
+EST_RUNNING_TIME = 10000
+
+# in seconds
+SAMPLING_RATE = 0.005
+SIMULATION_COMMAND =sh /opt/dddassimulation/runDDDASSim.sh
+# Currently designed for 5 rooms example
+STRATEGY = 2
+NUMBER_OF_HEATERS = 3
+#Not used
+THRESHOLD_PERCENT = 90
+#not used
+SIM_TIME = 100

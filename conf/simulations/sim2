@@ -1,0 +1,26 @@
+[PROCESS_DETAILS]
+NUMBER_OF_SIMS = 500
+CPU_COUNT = 1
+ALLOCATION_POLICY = DEADLINE
+#IMAGE_NAME = *.*.*.*:5000/sumo-sim
+IMAGE_NAME = 10.2.109.8:5000/myfirstimage:latest
+WORKING_DIR = /opt/sumo/
+# Currently using zeromq, will change for dynamic type later
+AGGREGATOR_IP = 10.2.109.9
+AGGREGATOR_PORT = 5556
+# 10 percent margin
+MARGIN = 0.0
+
+# These details have to be figured out for different hosts
+AVG_CPU = 5
+
+[SIM_INPUT]
+# deadline in seconds
+DEADLINE = 600
+STRATEGY = 1
+PARAM1 = 10     20      30      67      100     200     400     500     1000    1500    2000    2500    3000    4000    5000    10000   15000   20000   50000   100000
+EST_RUNNING_TIME = 7500 8189 7778     7845 7880 8711 9588 9561 13308 14395 17788 21197 23595 30282 38133 70154 100623 130145 270966 491897
+SIMULATION_COMMAND =sh /opt/sumo/sumosim.sh
+# Currently designed for 5 rooms example
+NUMBER_OF_VEHICLES_START = 1000
+NUMBER_OF_VEHICLES_STEP = 10
