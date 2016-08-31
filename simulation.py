@@ -246,6 +246,7 @@ class OptimizationSimulation(Simulation):
 		#for i in range(self.dim):
 		#	tmp.append(self.range[1] - 1)
 		self.params = tuple(tmp)
+		self.best = tuple(tmp)
 
 	def stage1(self):
 		self.selected = []
@@ -253,6 +254,8 @@ class OptimizationSimulation(Simulation):
 			self.K = self.K0 + 1
 		else:
 			self.K = int(self.K0 * math.exp(-1 * self.T)) + 1
+			if self.K < 4:
+				self.params = self.best
 		num_sims = self.number_of_sims
 		while len(self.selected) != self.K:
 			idx = random.randint(0, self.dim - 1)
@@ -322,6 +325,9 @@ class OptimizationSimulation(Simulation):
 			task = self.tasks.get(id)
 			input_params = task.input_params
 			results = task.result #TASK_RESULT[id] # TODO:: add result
+			inp = ast.literal_eval(input_params)
+			para = inp[2]
+			para[inp[0]] = inp[1]
 			if self.is_dummy(results):
 				continue
 			ret = ast.literal_eval(results)
@@ -335,6 +341,7 @@ class OptimizationSimulation(Simulation):
 				para_dict[index] = value
 				output_dict[index] = output
 			if output > self.result:
+				self.best = tuple(para)
 				self.updateResult(output)
 
 		# for ele in updating_para:
