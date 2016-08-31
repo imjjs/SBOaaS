@@ -8,6 +8,7 @@ from dddas_exception import NoCapacityException, DeadlineMissedException
 from constants import *
 
 host_log = open("./output/host_" + str(datetime.datetime.now()), "wb")
+sim_log = open("./output/sim_" + str(datetime.datetime.now()), "wb")
 
 SCHEDULE_FOUND = False
 
@@ -194,6 +195,9 @@ class SimulationManager(object):
 		logging.info('found sim'  + str(sim))
 		if sim is None:
 			return "Simulation not found"
+
+		sim_log.write(str(datetime.datetime.now()) + ',' + sim_name + ',' + str(task_id) + ',' + str(duration) + ',' + str(result) + '\n')
+		sim_log.flush()
 		self.scheduler_lock.acquire()
 		try:
 			tasks = sim.getTasks()

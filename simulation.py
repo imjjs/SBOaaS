@@ -225,7 +225,7 @@ class OptimizationSimulation(Simulation):
 		self.creation_round = 0
 		self.first_pending_id = 0
 		##################################
-		self.adaptive = True
+		self.adaptive = False
 		self.K0 = 12
 		self.T = 0
 		self.dim = 18
@@ -242,9 +242,9 @@ class OptimizationSimulation(Simulation):
 		self.stage = 1
 		self.numParams = (self.range[1] - self.range[0]) / self.step
 		##################################
-		tmp = []
-		for i in range(self.dim):
-			tmp.append(self.range[1] - 1)
+		tmp = [1,1,6,4,3,2,1,1,5,3,1,2,2,1,2,2,1,0]
+		#for i in range(self.dim):
+		#	tmp.append(self.range[1] - 1)
 		self.params = tuple(tmp)
 
 	def stage1(self):
