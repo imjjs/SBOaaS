@@ -225,7 +225,7 @@ class OptimizationSimulation(Simulation):
 		self.creation_round = 0
 		self.first_pending_id = 0
 		##################################
-		self.adaptive = False
+		self.adaptive = True
 		self.K0 = 12
 		self.T = 0
 		self.dim = 18
@@ -242,9 +242,10 @@ class OptimizationSimulation(Simulation):
 		self.stage = 1
 		self.numParams = (self.range[1] - self.range[0]) / self.step
 		##################################
-		tmp = [1,1,6,4,3,2,1,1,5,3,1,2,2,1,2,2,1,0]
-		#for i in range(self.dim):
-		#	tmp.append(self.range[1] - 1)
+		tmp = []
+		#tmp = [1,1,6,4,3,2,1,1,5,3,1,2,2,1,2,2,1,0]
+		for i in range(self.dim):
+			tmp.append(self.range[1] - 1)
 		self.params = tuple(tmp)
 		self.best = tuple(tmp)
 
@@ -326,8 +327,9 @@ class OptimizationSimulation(Simulation):
 			input_params = task.input_params
 			results = task.result #TASK_RESULT[id] # TODO:: add result
 			inp = ast.literal_eval(input_params)
-			para = inp[2]
+			para = list(inp[2])
 			para[inp[0]] = inp[1]
+			print "para:" + str(para)
 			if self.is_dummy(results):
 				continue
 			ret = ast.literal_eval(results)
